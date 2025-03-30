@@ -1,9 +1,12 @@
-
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/track', methods=['POST'])
+@app.route("/")
+def home():
+    return "✅ Το backend σου τρέχει!"
+
+@app.route("/track", methods=["POST"])
 def track_listings():
     data = request.get_json()
     url = data.get("url", "")
@@ -20,6 +23,3 @@ def track_listings():
             "new_listing_found": False,
             "message": "Δεν βρέθηκαν αγγελίες ή το URL δεν υποστηρίζεται ακόμα."
         })
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
